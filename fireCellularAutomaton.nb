@@ -1,0 +1,679 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     28909,        671]
+NotebookOptionsPosition[     28475,        655]
+NotebookOutlinePosition[     28822,        670]
+CellTagsIndexPosition[     28779,        667]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "\:0421\:044a\:0437\:0434\:0430\:0432\:0430\:043d\:0435", " ", 
+    "\:043d\:0430", " ", "\:0433\:043e\:0440\:0430"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"initForest", "[", 
+     RowBox[{"n_", ",", "probTree_", ",", "probBurning_"}], "]"}], ":=", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"forest", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"Table", "[", 
+          RowBox[{"0", ",", "n"}], "]"}], ",", "n"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "2"}], ",", 
+        RowBox[{"i", "<", "n"}], ",", 
+        RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"For", "[", 
+          RowBox[{
+           RowBox[{"j", "=", "2"}], ",", 
+           RowBox[{"j", "<", "n"}], ",", 
+           RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"RandomVariate", "[", 
+                RowBox[{"UniformDistribution", "[", 
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", "1"}], "}"}], "]"}], "]"}], 
+               "\[LessEqual]", "probTree"}], ",", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"forest", "[", 
+                  RowBox[{"[", "i", "]"}], "]"}], "[", 
+                 RowBox[{"[", "j", "]"}], "]"}], "=", "1"}], ";", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"RandomVariate", "[", 
+                   RowBox[{"UniformDistribution", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "1"}], "}"}], "]"}], "]"}], 
+                  "\[LessEqual]", "probBurning"}], ",", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"forest", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "=", "2"}], ";"}]}], 
+                "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+          "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", "]"}],
+       ";", "\[IndentingNewLine]", "forest"}], "\[IndentingNewLine]", ")"}]}],
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "\:041e\:0441\:043d\:043e\:0432\:043d\:0430", " ", 
+     "\:0444\:0443\:043d\:043a\:0446\:0438\:044f"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"fire", "[", 
+     RowBox[{
+     "n_", ",", "probTree_", ",", "probBurning_", ",", "probImmune_", ",", 
+      "T_"}], "]"}], ":=", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"forestStart", "=", 
+       RowBox[{"initForest", "[", 
+        RowBox[{"n", ",", "probTree", ",", "probBurning"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"forestTime", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"Table", "[", 
+            RowBox[{"0", ",", "n"}], "]"}], ",", "n"}], "]"}], ",", "T"}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"forestTime", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "=", "forestStart"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"t", "=", "1"}], ",", 
+        RowBox[{"t", "<", "T"}], ",", 
+        RowBox[{"t", "++"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"For", "[", 
+          RowBox[{
+           RowBox[{"i", "=", "2"}], ",", 
+           RowBox[{"i", "<", "n"}], ",", 
+           RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"For", "[", 
+             RowBox[{
+              RowBox[{"j", "=", "2"}], ",", 
+              RowBox[{"j", "<", "n"}], ",", 
+              RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
+              "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", "t", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", 
+                   RowBox[{"[", "j", "]"}], "]"}], "\[Equal]", "2"}], ",", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"t", "+", "1"}], "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", 
+                   RowBox[{"[", "j", "]"}], "]"}], "=", "0"}]}], "]"}], ";", 
+               "\[IndentingNewLine]", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", "t", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", 
+                   RowBox[{"[", "j", "]"}], "]"}], "\[Equal]", "1"}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"If", "[", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", "t", "]"}], "]"}], "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", "+", "1"}], "]"}], "]"}], "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "\[Equal]", "2"}], "||", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", "t", "]"}], "]"}], "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", "-", "1"}], "]"}], "]"}], "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "\[Equal]", "2"}], "||", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", "t", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", 
+                    RowBox[{"[", 
+                    RowBox[{"j", "+", "1"}], "]"}], "]"}], "\[Equal]", "2"}], 
+                    "||", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", "t", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", 
+                    RowBox[{"[", 
+                    RowBox[{"j", "-", "1"}], "]"}], "]"}], "\[Equal]", 
+                    "2"}]}], ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"RandomVariate", "[", 
+                    RowBox[{"UniformDistribution", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "1"}], "}"}], "]"}], "]"}], 
+                    "\[LessEqual]", "probImmune"}], ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"t", "+", "1"}], "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "=", "1"}], ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"t", "+", "1"}], "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "=", "2"}]}], "]"}], 
+                    ";"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"t", "+", "1"}], "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "=", "1"}]}], 
+                   "\[IndentingNewLine]", "]"}], ";"}]}], 
+                "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", 
+             RowBox[{"(*", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"forestTime", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"t", "+", "1"}], "]"}], "]"}], "[", 
+                  RowBox[{"[", "i", "]"}], "]"}], "[", 
+                 RowBox[{"[", "j", "]"}], "]"}], "=", 
+                RowBox[{"Switch", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", "t", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", 
+                   RowBox[{"[", "j", "]"}], "]"}], ",", "\[IndentingNewLine]",
+                   "2", ",", "0", ",", "\[IndentingNewLine]", "1", ",", 
+                  RowBox[{
+                   RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", "t", "]"}], "]"}], "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", "+", "1"}], "]"}], "]"}], "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "\[Equal]", "2"}], "||", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", "t", "]"}], "]"}], "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", "-", "1"}], "]"}], "]"}], "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "\[Equal]", "2"}], "||", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", "t", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", 
+                    RowBox[{"[", 
+                    RowBox[{"j", "+", "1"}], "]"}], "]"}], "\[Equal]", "2"}], 
+                    "||", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", "t", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", 
+                    RowBox[{"[", 
+                    RowBox[{"j", "-", "1"}], "]"}], "]"}], "\[Equal]", 
+                    "2"}]}], ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"RandomVariate", "[", 
+                    RowBox[{"UniformDistribution", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "1"}], "}"}], "]"}], "]"}], 
+                    "\[LessEqual]", "probImmune"}], ",", "1", ",", "2"}], 
+                    "]"}], ";"}], ",", "\[IndentingNewLine]", "1"}], "]"}], 
+                   ";", "\[IndentingNewLine]", "0"}], ",", "0"}], 
+                 "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]",
+               "*)"}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+          "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", "]"}],
+       ";", "\[IndentingNewLine]", "forestTime"}], "\[IndentingNewLine]", 
+     ")"}]}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"fire", "[", 
+      RowBox[{
+      "n_", ",", "probTree_", ",", "probBurning_", ",", "probImmune_", ",", 
+       "T_"}], "]"}], ":=", 
+     RowBox[{"(", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"forestStart", "=", 
+        RowBox[{"initForest", "[", 
+         RowBox[{"n", ",", "probTree", ",", "probBurning"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"forestTime", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"Table", "[", 
+             RowBox[{"0", ",", "n"}], "]"}], ",", "n"}], "]"}], ",", "T"}], 
+         "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"forestTime", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "=", "forestStart"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"t", "=", "1"}], ",", 
+         RowBox[{"t", "<", "T"}], ",", 
+         RowBox[{"t", "++"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"For", "[", 
+           RowBox[{
+            RowBox[{"i", "=", "2"}], ",", 
+            RowBox[{"i", "<", "n"}], ",", 
+            RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"For", "[", 
+              RowBox[{
+               RowBox[{"j", "=", "2"}], ",", 
+               RowBox[{"j", "<", "n"}], ",", 
+               RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"forestTime", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"t", "+", "1"}], "]"}], "]"}], "[", 
+                   RowBox[{"[", "i", "]"}], "]"}], "[", 
+                  RowBox[{"[", "j", "]"}], "]"}], "=", "\[IndentingNewLine]", 
+                 RowBox[{"If", "[", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", "t", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "\[Equal]", "2"}], ",", 
+                   "\[IndentingNewLine]", "0", ",", "\[IndentingNewLine]", 
+                   RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", "t", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "\[Equal]", "1"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", "t", "]"}], "]"}], "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", "+", "1"}], "]"}], "]"}], "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "\[Equal]", "2"}], "||", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", "t", "]"}], "]"}], "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", "-", "1"}], "]"}], "]"}], "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "\[Equal]", "2"}], "||", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", "t", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", 
+                    RowBox[{"[", 
+                    RowBox[{"j", "+", "1"}], "]"}], "]"}], "\[Equal]", "2"}], 
+                    "||", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"forestTime", "[", 
+                    RowBox[{"[", "t", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", 
+                    RowBox[{"[", 
+                    RowBox[{"j", "-", "1"}], "]"}], "]"}], "\[Equal]", 
+                    "2"}]}], ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"RandomVariate", "[", 
+                    RowBox[{"UniformDistribution", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "1"}], "}"}], "]"}], "]"}], 
+                    "\[LessEqual]", "probImmune"}], ",", "1", ",", "2"}], 
+                    "]"}], ";"}], ",", "\[IndentingNewLine]", "1"}], 
+                    "\[IndentingNewLine]", "]"}], ";"}]}], 
+                    "\[IndentingNewLine]", "]"}], ";"}]}], 
+                  "\[IndentingNewLine]", "]"}]}], ";"}]}], 
+              "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", 
+           "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+       "\[IndentingNewLine]", "forestTime"}], "\[IndentingNewLine]", ")"}]}], 
+    "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "\:041d\:0430\:0447\:0430\:043b\:043d\:0438", " ", 
+     "\:0443\:0441\:043b\:043e\:0432\:0438\:044f"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"n", "=", "50"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"probTree", "=", "0.8"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"probBurning", "=", "0.0005"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"probImmune", "=", "0.25"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"T", "=", "50"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "\:0412\:0438\:043a\:0430\:043d\:0435", " ", "\:043d\:0430", " ", 
+     "\:043e\:0441\:043d\:043e\:0432\:043d\:0430", " ", 
+     "\:0444\:0443\:043d\:043a\:0446\:0438\:044f"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"forestFire", "=", 
+     RowBox[{"fire", "[", 
+      RowBox[{
+      "n", ",", "probTree", ",", "probBurning", ",", "probImmune", ",", "T"}],
+       "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+   "(*", "\:0418\:0437\:043e\:0431\:0440\:0430\:0437\:044f\:0432\:0430\:043d\
+\:0435", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"backGroundList", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"Table", "[", 
+           RowBox[{"0", ",", "n"}], "]"}], ",", "n"}], "]"}], ",", "T"}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"t", "=", "1"}], ",", 
+       RowBox[{"t", "<=", "T"}], ",", 
+       RowBox[{"t", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"For", "[", 
+         RowBox[{
+          RowBox[{"i", "=", "1"}], ",", 
+          RowBox[{"i", "<=", "n"}], ",", 
+          RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"For", "[", 
+            RowBox[{
+             RowBox[{"j", "=", "1"}], ",", 
+             RowBox[{"j", "<=", "n"}], ",", 
+             RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"backGroundList", "[", 
+                  RowBox[{"[", "t", "]"}], "]"}], "[", 
+                 RowBox[{"[", "i", "]"}], "]"}], "[", 
+                RowBox[{"[", "j", "]"}], "]"}], "=", "\[IndentingNewLine]", 
+               RowBox[{"Switch", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"forestFire", "[", 
+                    RowBox[{"[", "t", "]"}], "]"}], "[", 
+                   RowBox[{"[", "i", "]"}], "]"}], "[", 
+                  RowBox[{"[", "j", "]"}], "]"}], ",", "\[IndentingNewLine]", 
+                 "0", ",", "Gray", ",", "\[IndentingNewLine]", "1", ",", 
+                 "Green", ",", "\[IndentingNewLine]", "2", ",", "Red"}], 
+                "\[IndentingNewLine]", "]"}]}], ";"}]}], 
+            "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", 
+         "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{"Grid", "[", 
+        RowBox[{
+         RowBox[{"forestFire", "[", 
+          RowBox[{"[", "l", "]"}], "]"}], ",", 
+         RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}], "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Grid", "[", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"Item", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{"forestFire", "[", 
+                 RowBox[{"[", "l", "]"}], "]"}], "[", 
+                RowBox[{"[", "i", "]"}], "]"}], "[", 
+               RowBox[{"[", "j", "]"}], "]"}], ",", 
+              RowBox[{"Background", "->", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"backGroundList", "[", 
+                  RowBox[{"[", "l", "]"}], "]"}], "[", 
+                 RowBox[{"[", "i", "]"}], "]"}], "[", 
+                RowBox[{"[", "j", "]"}], "]"}]}]}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"j", ",", "1", ",", "n"}], "}"}]}], "]"}], "]"}], 
+       "\[IndentingNewLine]", ",", 
+       RowBox[{"{", 
+        RowBox[{"l", ",", "1", ",", "T", ",", "1"}], "}"}]}], 
+      "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Animate", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"ArrayPlot", "[", 
+      RowBox[{
+       RowBox[{"forestFire", "[", 
+        RowBox[{"[", "l", "]"}], "]"}], ",", 
+       RowBox[{"ColorRules", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"0", "\[Rule]", "Gray"}], ",", 
+          RowBox[{"1", "\[Rule]", "Green"}], ",", 
+          RowBox[{"2", "\[Rule]", "Red"}]}], "}"}]}], ",", 
+       RowBox[{"Mesh", "\[Rule]", "True"}], ",", 
+       RowBox[{"PlotLegends", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"\"\<Empty\>\"", ",", "\"\<Tree\>\"", ",", "\"\<Fire\>\""}], 
+         "}"}]}], ",", " ", 
+       RowBox[{"ImageSize", "->", "Large"}]}], "]"}], "\[IndentingNewLine]", 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"l", ",", "1", ",", "T", ",", "1"}], "}"}], ",", 
+     RowBox[{"DefaultDuration", "\[Rule]", "12"}], ",", 
+     RowBox[{"AnimationRunning", "\[Rule]", "False"}]}], 
+    "\[IndentingNewLine]", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.8176463714614744`*^9, 3.8176463819834228`*^9}, {
+   3.8176464507518845`*^9, 3.817646799954625*^9}, {3.8176468720918574`*^9, 
+   3.817646963350286*^9}, {3.8176469985792656`*^9, 3.8176472739434595`*^9}, {
+   3.817647335262465*^9, 3.817647474422227*^9}, {3.8176475116618595`*^9, 
+   3.817647514282984*^9}, {3.8176475637793503`*^9, 3.817647797372576*^9}, {
+   3.8176479092592115`*^9, 3.8176479470806284`*^9}, {3.8176479902212257`*^9, 
+   3.817647992333687*^9}, {3.817648052022009*^9, 3.8176480819116488`*^9}, {
+   3.8176481236779594`*^9, 3.8176481295512776`*^9}, {3.817648259335146*^9, 
+   3.817648480642437*^9}, {3.8176485360968046`*^9, 3.8176485372010517`*^9}, {
+   3.817648615116481*^9, 3.8176486233533125`*^9}, {3.8176486803250303`*^9, 
+   3.8176487888822155`*^9}, 3.8176489053821716`*^9, {3.8176490968458204`*^9, 
+   3.817649230139494*^9}, {3.8176493071596394`*^9, 3.817649382200367*^9}, {
+   3.817649415708806*^9, 3.817649448425108*^9}, {3.8176495461578875`*^9, 
+   3.8176496114924865`*^9}, {3.8176497029038715`*^9, 3.817649726012023*^9}, 
+   3.8176497621910915`*^9, {3.8176498614472475`*^9, 3.817649861619274*^9}, {
+   3.8176499727301245`*^9, 3.817650055219534*^9}, {3.8176501024250927`*^9, 
+   3.8176501328949165`*^9}, {3.817650203684766*^9, 3.8176502075816393`*^9}, {
+   3.8176502411071405`*^9, 3.8176503590894885`*^9}, {3.817650419175918*^9, 
+   3.8176504396024656`*^9}, {3.8176505239493527`*^9, 3.817650583886734*^9}, {
+   3.817650619960779*^9, 3.8176506217752676`*^9}, {3.81765068865114*^9, 
+   3.817650699521558*^9}, {3.8176507316627407`*^9, 3.8176507658493724`*^9}, {
+   3.8177341968833566`*^9, 3.8177342431199694`*^9}, 3.8180819472459593`*^9, 
+   3.8180821149708557`*^9, {3.8180821992127523`*^9, 3.818082223728963*^9}, {
+   3.8180822557868996`*^9, 3.8180822625073195`*^9}, {3.819457211095683*^9, 
+   3.81945722437813*^9}, {3.8194623889900527`*^9, 3.8194623931083727`*^9}},
+ FontSize->36,ExpressionUUID->"c2fbee67-cf5c-4ec9-a6f7-5159f573f77a"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`l$$ = 16, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`l$$], 1, 50, 1}}, Typeset`size$$ = {
+    576., {285., 290.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`l$22013$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`l$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`l$$, $CellContext`l$22013$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ArrayPlot[
+        Part[$CellContext`forestFire, $CellContext`l$$], 
+        ColorRules -> {0 -> Gray, 1 -> Green, 2 -> Red}, Mesh -> True, 
+        PlotLegends -> {"Empty", "Tree", "Fire"}, ImageSize -> Large], 
+      "Specifications" :> {{$CellContext`l$$, 1, 50, 1, DefaultDuration -> 12,
+          AnimationRunning -> False, 
+         AppearanceElements -> {
+          "ProgressSlider", "PlayPauseButton", "FasterSlowerButtons", 
+           "DirectionButton"}}}, 
+      "Options" :> {
+       ControlType -> Animator, AppearanceElements -> None, DefaultBaseStyle -> 
+        "Animate", DefaultLabelStyle -> "AnimateLabel", SynchronousUpdating -> 
+        True, ShrinkingDelay -> 24.}, "DefaultOptions" :> {}],
+     ImageSizeCache->{627., {324., 330.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Animate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.817650492216243*^9, 3.817650515749511*^9}, {
+   3.817650591237365*^9, 3.8176506250999255`*^9}, 3.8176507021021347`*^9, {
+   3.8176507359126906`*^9, 3.8176507957510605`*^9}, {3.8177341930905495`*^9, 
+   3.8177342478609543`*^9}, 3.8180818682840567`*^9, {3.818081950216608*^9, 
+   3.818081959175561*^9}, {3.818082226539566*^9, 3.818082231365619*^9}, {
+   3.8180822653059287`*^9, 3.8180822752210903`*^9}, {3.8194571633614764`*^9, 
+   3.8194571680922575`*^9}, 
+   3.819457214266502*^9},ExpressionUUID->"bab32b58-419e-435c-b1e3-\
+ba662a17da10"]
+}, Open  ]]
+},
+WindowSize->{1904, 997},
+WindowMargins->{{-8, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (September 10, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 25221, 578, 5939, "Input",ExpressionUUID->"c2fbee67-cf5c-4ec9-a6f7-5159f573f77a"],
+Cell[25804, 602, 2655, 50, 673, "Output",ExpressionUUID->"bab32b58-419e-435c-b1e3-ba662a17da10"]
+}, Open  ]]
+}
+]
+*)
+

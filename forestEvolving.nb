@@ -1,0 +1,483 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     18897,        475]
+NotebookOptionsPosition[     18370,        458]
+NotebookOutlinePosition[     18716,        473]
+CellTagsIndexPosition[     18673,        470]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ StyleBox[
+  RowBox[{
+   RowBox[{"forestSize", "=", "3000"}], ";"}],
+  FontSize->48], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"T", "=", "50"}], ";"}],
+  FontSize->48], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"pR0", "=", "0.5"}], ";"}],
+  FontSize->48], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"P", "=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"0.5", ",", "0.74"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0.5", ",", "0.26"}], "}"}]}], "}"}]}], ";"}],
+  FontSize->48], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"forestGenerations", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Table", "[", 
+       RowBox[{"0", ",", "forestSize"}], "]"}], ",", "T"}], "]"}]}], ";"}],
+  FontSize->48], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"forestGenerations", "[", 
+      RowBox[{"[", "1", "]"}], "]"}], "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"RandomVariate", "[", 
+           RowBox[{"UniformDistribution", "[", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", "1"}], "}"}], "]"}], "]"}], "<=", "pR0"}], ",",
+          "0", ",", "1"}], "]"}], ",", "forestSize"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"(", "*"}]], 
+    RowBox[{
+     RowBox[{"Print", "[", 
+      RowBox[{"StringForm", "[", 
+       RowBox[{"\"\<Starting forest is: ``\>\"", ",", 
+        RowBox[{"forestGenerations", "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "]"}], ";"}], 
+    StyleBox[
+     RowBox[{"*", ")"}]]}], "\[IndentingNewLine]", "\[IndentingNewLine]"}],
+  FontSize->48], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"k", "=", "1"}], ",", 
+     RowBox[{"k", "<", "T"}], ",", 
+     RowBox[{"k", "++"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"forestGenerations", "[", 
+        RowBox[{"[", 
+         RowBox[{"k", "+", "1"}], "]"}], "]"}], "=", 
+       RowBox[{"Table", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"forestGenerations", "[", 
+              RowBox[{"[", "k", "]"}], "]"}], "[", 
+             RowBox[{"[", "j", "]"}], "]"}], "\[Equal]", "0"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"RandomVariate", "[", 
+               RowBox[{"UniformDistribution", "[", 
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "1"}], "}"}], "]"}], "]"}], "<=", 
+              RowBox[{
+               RowBox[{"P", "[", 
+                RowBox[{"[", "1", "]"}], "]"}], "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], ",", "0", ",", "1"}], "]"}], 
+           ",", "\[IndentingNewLine]", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"RandomVariate", "[", 
+               RowBox[{"UniformDistribution", "[", 
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "1"}], "}"}], "]"}], "]"}], "<=", 
+              RowBox[{
+               RowBox[{"P", "[", 
+                RowBox[{"[", "1", "]"}], "]"}], "[", 
+               RowBox[{"[", "2", "]"}], "]"}]}], ",", "0", ",", "1"}], 
+            "]"}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+         RowBox[{"{", 
+          RowBox[{"j", ",", "1", ",", "forestSize"}], "}"}]}], "]"}]}], 
+      ";"}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]"}],
+  FontSize->48], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"forestGenerationsNormed", "=", 
+     RowBox[{
+      RowBox[{"1", "/", "forestSize"}], "*", "forestGenerations"}]}], ";"}], 
+   "\[IndentingNewLine]"}],
+  FontSize->48], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"ListPlot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"k", ",", 
+           RowBox[{"1", "-", 
+            RowBox[{"Sum", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"forestGenerationsNormed", "[", 
+                RowBox[{"[", "k", "]"}], "]"}], "[", 
+               RowBox[{"[", "j", "]"}], "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"j", ",", "1", ",", "forestSize"}], "}"}]}], "]"}]}]}],
+           "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"k", ",", "1", ",", "T"}], "}"}]}], "]"}], ",", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"k", ",", 
+           RowBox[{"Sum", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"forestGenerationsNormed", "[", 
+               RowBox[{"[", "k", "]"}], "]"}], "[", 
+              RowBox[{"[", "j", "]"}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"j", ",", "1", ",", "forestSize"}], "}"}]}], "]"}]}], 
+          "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"k", ",", "1", ",", "T"}], "}"}]}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotLabels", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"\"\<R\>\"", ",", "\"\<H\>\""}], "}"}]}], ",", 
+     RowBox[{"AxesLabel", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"\"\<n\>\"", ",", "\"\<Trees at n\>\""}], "}"}]}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"0", ",", 
+          RowBox[{"T", "+", "1"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "1"}], "}"}]}], "}"}]}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Large"}]}], "]"}], 
+   "\[IndentingNewLine]"}],
+  FontSize->48], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"endForest", "=", 
+    RowBox[{"Sum", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"forestGenerationsNormed", "[", 
+        RowBox[{"[", "T", "]"}], "]"}], "[", 
+       RowBox[{"[", "j", "]"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"j", ",", "1", ",", "forestSize"}], "}"}]}], "]"}]}], ";"}],
+  FontSize->48], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{"StringForm", "[", 
+     RowBox[{"\"\<Equilibrium R: `` H: ``\>\"", ",", 
+      RowBox[{"1", "-", "endForest"}], ",", "endForest"}], "]"}], "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"(", "*"}]], "\[IndentingNewLine]", 
+    RowBox[{"ListPlot", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"k", ",", 
+            RowBox[{"forestSize", "-", 
+             RowBox[{"Sum", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"forestGenerations", "[", 
+                 RowBox[{"[", "k", "]"}], "]"}], "[", 
+                RowBox[{"[", "j", "]"}], "]"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"j", ",", "1", ",", "forestSize"}], "}"}]}], 
+              "]"}]}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"k", ",", "1", ",", "T"}], "}"}]}], "]"}], ",", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"k", ",", 
+            RowBox[{"Sum", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"forestGenerations", "[", 
+                RowBox[{"[", "k", "]"}], "]"}], "[", 
+               RowBox[{"[", "j", "]"}], "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"j", ",", "1", ",", "forestSize"}], "}"}]}], "]"}]}], 
+           "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"k", ",", "1", ",", "T"}], "}"}]}], "]"}]}], "}"}], ",", 
+      RowBox[{"PlotLabels", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"\"\<R\>\"", ",", "\"\<H\>\""}], "}"}]}], ",", 
+      RowBox[{"AxesLabel", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"\"\<n\>\"", ",", "\"\<Trees at n\>\""}], "}"}]}], ",", 
+      RowBox[{"PlotRange", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"0", ",", 
+           RowBox[{"T", "+", "1"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "forestSize"}], "}"}]}], "}"}]}], ",", 
+      RowBox[{"ImageSize", "\[Rule]", "Large"}]}], "]"}], 
+    StyleBox[
+     RowBox[{"*", ")"}]]}]}],
+  FontSize->48], "\[IndentingNewLine]"
+ StyleBox[,
+  FontSize->48]}], "Input",
+ CellChangeTimes->{{3.8152311319585*^9, 3.815231556624728*^9}, {
+   3.815231618128706*^9, 3.815231772356042*^9}, {3.815231833334298*^9, 
+   3.8152320144970064`*^9}, {3.8152320762351537`*^9, 
+   3.8152324785520153`*^9}, {3.815232513864214*^9, 3.815232777185069*^9}, {
+   3.815232821913044*^9, 3.8152328544280005`*^9}, 3.8152328908073053`*^9, {
+   3.8152330917768025`*^9, 3.8152330985894737`*^9}, {3.8152331381747327`*^9, 
+   3.8152331539362516`*^9}, {3.815233255869568*^9, 3.815233259637414*^9}},
+ FontSize->14,ExpressionUUID->"e1522bae-0576-4af4-b130-a11f9aac39bc"],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.009166666666666668], 
+     AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJxTTMoPSmViYGAwAmIQDQEf7J0vTenazH/fHirg4DErqPDbw8dQPofDpdub
+wo6zwPgCDv7SL7Y0+sH4Ig4ZE9/W2Js+gvIlHBQzvY7ebIfJyzi0i9089z0Y
+xldweD3jwUGbQBhfyeFhlcg694cw/SoOFzZoO7wzhcmrOUwFum5+Ioyv4fBR
+soz1xF6Yei0Hx+W8JbccYPI6aOr1HFbWK0+5eBum3sAhi3mu2YVMmLyhwyGb
+wP9uGjC+kcOWE2X75kvB+MYOOXoqvistYHwTtPAwdaha9K83wA3GN3OYze0Z
+rHUOZp+5A9f1xQW2XDB5CzT1lg41Z1uXaIrC+FZo5luj6bdxmL7VSq3CAMa3
+RXO/HZp59g7bPv+9UvES5h4H1PBqcHCo+8Gzm+kJTN4R1bwGR4dNc98vP+YN
+M8/JIeHpBaXbP6HqG5wc7GvaYhmLYPLOqOHd4IzmXhcH17/SC3vuweRdHDjW
+yESlWMPkXR2OpN8QVfgOk3dFk3dD9V+Dm8N9/97peUIweXcHEK/5AEy/u8PL
+3MjVyU0weQ+HPBCXHabfw+GA4KkXuZEweU+HQLf801Gyj+0Blr/plw==
+      "]]}, 
+    {RGBColor[0.880722, 0.611041, 0.142051], PointSize[0.009166666666666668], 
+     AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJxTTMoPSmViYGAwAmIQDQEf7O9P22qlVvHAHirgkH86SlbY5gaUz+EQ6zEr
+qPDbTShfwCH5pP60P0kwvoiD/l0Vtsapt6F8CYe9utmlPh9g+mUcPl3yTRKI
+gKlXcNA6Z1fTFgvjKznYcl1fXGB7C8pXcUict6JeeQpMXs3h2qsZDw7awPga
+DnJnhL/mt8DUaznUbXwi7l0Hk9dBU6/nsJ5h5/UYD5h6Awedn0cnxevA5A0d
+gI5hLFoP4xs5zMgTaj5wCsY3dtBYvD11bR+Mb4IWHqYOvLuZnsQVw/hmDqde
+5EauTobZZ+7wJnCHXOtrmLwFmnpLB87UL9vWXIXxrdDMt0bTb+NwaUrXZv75
+ML4tmvvt0Myzd5gswRLGpwtzjwNqeDU4OLDyP+v8ZQ6Td0Q1r8HRYc4RhQ1F
+GTDznBzsTeN2efJA1Tc4OTSxf3b5Kw2Td0YN7wZnNPe6OJSxntj7zAkm7+Lw
+Yfkxb/NOmLyrQ4WB/5X9gjB5VzR5N1T/Nbg5OCU8vaB0Gybv7gDi/ayD6Xd3
+0FPxXWnxG5YePRzA3A8w/R4ODXeygUpg+j0d4osVM72O3rQHAHgt6Qo=
+      "]]}, {}}, {{}, {}}, {{GraphicsGroupBox[{
+       {GrayLevel[1], AbsoluteThickness[4], Opacity[
+         NCache[
+          Rational[2, 3], 0.6666666666666666]], CapForm["Butt"], JoinForm[
+        "Round"], 
+        BSplineCurveBox[{
+         Offset[{0, 0}, {51, 0.5973333333333334}], 
+          Offset[{0, 0}, {51, 0.5973333333333334}], 
+          Offset[{0., 0.}, {51.510000000000005`, 0.5973333333333334}], 
+          Offset[{0., 0.}, {51.510000000000005`, 0.5973333333333334}], 
+          Offset[{0., 0.}, {52.02, 0.5973333333333334}], 
+          Offset[{0, 0}, {53.04229046705763, 0.5974680666896649}], 
+          Offset[{5., 1.1102230246251565`*^-15}, {53.04229046705763, 
+           0.5974680666896649}], 
+          Offset[{10., 2.220446049250313*^-15}, {53.04229046705763, 
+           0.5974680666896649}], 
+          Offset[{10., 2.220446049250313*^-15}, {53.04229046705763, 
+           0.5974680666896649}]}]}, 
+       {RGBColor[0.6666666666666666, 0.6666666666666666, 0.6666666666666666], 
+        BSplineCurveBox[{
+         Offset[{0, 0}, {51, 0.5973333333333334}], 
+          Offset[{0, 0}, {51, 0.5973333333333334}], 
+          Offset[{0., 0.}, {51.510000000000005`, 0.5973333333333334}], 
+          Offset[{0., 0.}, {51.510000000000005`, 0.5973333333333334}], 
+          Offset[{0., 0.}, {52.02, 0.5973333333333334}], 
+          Offset[{0, 0}, {53.04229046705763, 0.5974680666896649}], 
+          Offset[{5., 1.1102230246251565`*^-15}, {53.04229046705763, 
+           0.5974680666896649}], 
+          Offset[{10., 2.220446049250313*^-15}, {53.04229046705763, 
+           0.5974680666896649}], 
+          Offset[{10., 2.220446049250313*^-15}, {53.04229046705763, 
+           0.5974680666896649}]}]}, 
+       {GrayLevel[1], Opacity[
+         NCache[
+          Rational[2, 3], 0.6666666666666666]], EdgeForm[None], 
+        PolygonBox[{
+         Offset[{23., 6.500000000000005}, {53.04229046705763, 
+           0.5974680666896649}], 
+          Offset[{23., -6.499999999999995}, {53.04229046705763, 
+           0.5974680666896649}], 
+          Offset[{10.000000000000002`, -6.499999999999998}, {
+           53.04229046705763, 0.5974680666896649}], 
+          Offset[{9.999999999999998, 6.500000000000002}, {53.04229046705763, 
+           0.5974680666896649}]}]}, 
+       {RGBColor[0.6666666666666666, 0.6666666666666666, 0.6666666666666666], 
+        EdgeForm[None]}, {}, InsetBox[
+        RotationBox["\<\"R\"\>",
+         BoxRotation->0.], 
+        Offset[{16.5, 3.6637359812630166*^-15}, \
+{53.04229046705763, 0.5974680666896649}], {0, 0}]}], GraphicsGroupBox[{
+       {GrayLevel[1], AbsoluteThickness[4], Opacity[
+         NCache[
+          Rational[2, 3], 0.6666666666666666]], CapForm["Butt"], JoinForm[
+        "Round"], 
+        BSplineCurveBox[{
+         Offset[{0, 0}, {51, 0.4026666666666667}], 
+          Offset[{0, 0}, {51, 0.4026666666666667}], 
+          Offset[{0., 0.}, {51.510000000000005`, 0.4026666666666667}], 
+          Offset[{0., 0.}, {51.510000000000005`, 0.4026666666666667}], 
+          Offset[{0., 0.}, {52.02, 0.4026666666666667}], 
+          Offset[{0, 0}, {53.04229046705763, 0.40253193331033515`}], 
+          Offset[{5., 1.1102230246251565`*^-15}, {53.04229046705763, 
+           0.40253193331033515`}], 
+          Offset[{10., 2.220446049250313*^-15}, {53.04229046705763, 
+           0.40253193331033515`}], 
+          Offset[{10., 2.220446049250313*^-15}, {53.04229046705763, 
+           0.40253193331033515`}]}]}, 
+       {RGBColor[0.6666666666666666, 0.6666666666666666, 0.6666666666666666], 
+        BSplineCurveBox[{
+         Offset[{0, 0}, {51, 0.4026666666666667}], 
+          Offset[{0, 0}, {51, 0.4026666666666667}], 
+          Offset[{0., 0.}, {51.510000000000005`, 0.4026666666666667}], 
+          Offset[{0., 0.}, {51.510000000000005`, 0.4026666666666667}], 
+          Offset[{0., 0.}, {52.02, 0.4026666666666667}], 
+          Offset[{0, 0}, {53.04229046705763, 0.40253193331033515`}], 
+          Offset[{5., 1.1102230246251565`*^-15}, {53.04229046705763, 
+           0.40253193331033515`}], 
+          Offset[{10., 2.220446049250313*^-15}, {53.04229046705763, 
+           0.40253193331033515`}], 
+          Offset[{10., 2.220446049250313*^-15}, {53.04229046705763, 
+           0.40253193331033515`}]}]}, 
+       {GrayLevel[1], Opacity[
+         NCache[
+          Rational[2, 3], 0.6666666666666666]], EdgeForm[None], 
+        PolygonBox[{
+         Offset[{23., 6.500000000000005}, {53.04229046705763, 
+           0.40253193331033515`}], 
+          Offset[{23., -6.499999999999995}, {53.04229046705763, 
+           0.40253193331033515`}], 
+          Offset[{10.000000000000002`, -6.499999999999998}, {
+           53.04229046705763, 0.40253193331033515`}], 
+          Offset[{9.999999999999998, 6.500000000000002}, {53.04229046705763, 
+           0.40253193331033515`}]}]}, 
+       {RGBColor[0.6666666666666666, 0.6666666666666666, 0.6666666666666666], 
+        EdgeForm[None]}, {}, InsetBox[
+        RotationBox["\<\"H\"\>",
+         BoxRotation->0.], 
+        Offset[{16.5, 3.6637359812630166*^-15}, \
+{53.04229046705763, 0.40253193331033515}], {0, 0}]}]}, {}}, {}, {}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{
+    FormBox["\"n\"", TraditionalForm], 
+    FormBox["\"Trees at n\"", TraditionalForm]},
+  AxesOrigin->{0, 0},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->{{All, 50.22604844889076}, {All, All}},
+  ImageSize->Large,
+  Method->{"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Identity[#]& )[
+         Part[#, 1]], 
+        (Identity[#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Identity[#]& )[
+         Part[#, 1]], 
+        (Identity[#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0, 51}, {0, 1}},
+  PlotRangeClipping->False,
+  PlotRangePadding->{{0, 0}, {0, 0}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{
+  3.815231776074897*^9, 3.8152318413265796`*^9, 3.8152318823600464`*^9, {
+   3.8152322920938344`*^9, 3.8152323679935846`*^9}, 3.815232433138647*^9, 
+   3.81523248052246*^9, {3.815232547077419*^9, 3.8152326325643635`*^9}, 
+   3.815232785701456*^9, {3.815232823727729*^9, 3.8152328587199297`*^9}, 
+   3.8152331043164062`*^9, 
+   3.8152332288968754`*^9},ExpressionUUID->"99d9144e-5571-4b66-8659-\
+b3e0ca6b4c7a"],
+
+Cell[BoxData[
+ InterpretationBox["\<\"Equilibrium R: \\!\\(\\*FractionBox[\\\"224\\\", \
+\\\"375\\\"]\\) H: \\!\\(\\*FractionBox[\\\"151\\\", \\\"375\\\"]\\)\"\>",
+  StringForm["Equilibrium R: `` H: ``", 
+   Rational[224, 375], 
+   Rational[151, 375]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.815232433016619*^9, 3.815232480394431*^9, {3.815232546963394*^9, 
+   3.8152326321067295`*^9}, 3.815232785241887*^9, {3.8152328231353083`*^9, 
+   3.8152328643008575`*^9}, 3.815233115994626*^9, 
+   3.815233229031862*^9},ExpressionUUID->"e18e59df-b1a2-40ff-b69e-\
+dab4d043be34"]
+}, Open  ]]
+},
+WindowSize->{1904, 997},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (September 10, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 9108, 256, 3290, "Input",ExpressionUUID->"e1522bae-0576-4af4-b130-a11f9aac39bc"],
+Cell[9691, 280, 8078, 161, 363, "Output",ExpressionUUID->"99d9144e-5571-4b66-8659-b3e0ca6b4c7a"],
+Cell[17772, 443, 582, 12, 47, "Print",ExpressionUUID->"e18e59df-b1a2-40ff-b69e-dab4d043be34"]
+}, Open  ]]
+}
+]
+*)
+
